@@ -45,6 +45,12 @@ const vPlayer = (function(){
         duration.textContent = displayTime(dur);
     }
 
+    const setProgress = (e)=>{
+        const newTime = e.offsetX / progressRange.offsetWidth;
+        progressBar.style.width = `${newTime*100}%`;
+        video.currentTime = newTime * video.duration;
+    }
+
 
     //Event Listeners
     playBtn.addEventListener("click", togglePlay);
@@ -54,7 +60,7 @@ const vPlayer = (function(){
     });
     video.addEventListener("timeupdate", updateProgress);
     video.addEventListener("canplay", updateProgress);
-
+    progressRange.addEventListener("click", setProgress);
     
     return{
         video: video,
